@@ -6,15 +6,22 @@ using UnityEngine;
 public class DirectionalBlur : MonoBehaviour {
     const string PROP_AMOUNT_TEX = "_AmountTex";
     const string PROP_DIRECTION  ="_Dir";
+    const string PROP_DISTANCE_STRETCH = "_StretchDist";
 
     [SerializeField]
     Shader shader;
     [SerializeField]
     Texture amountTex;
+
     [SerializeField]
-    int iterations;
+    [Range(1f, 10f)]
+    int iterations = 1;
     [SerializeField]
-    float direction;
+    [Range(0f, 1f)]
+    float stretchDist = 1f;
+    [SerializeField]
+    [Range(0f, 1f)]
+    float direction = 0f;
 
     Material mat;
     DepthTextureMode lastDepthTexMode;
@@ -31,7 +38,7 @@ public class DirectionalBlur : MonoBehaviour {
     void OnRenderImage(RenderTexture src, RenderTexture dst) {
         mat.SetTexture (PROP_AMOUNT_TEX, amountTex);
         mat.SetFloat (PROP_DIRECTION, direction);
-        iterations = Mathf.Max (1, iterations);
+        mat.SetFloat (PROP_DISTANCE_STRETCH, stretchDist);
 
         var tmp0 = RenderTexture.GetTemporary (src.width, src.height, 0, src.format);
         var tmp1 = RenderTexture.GetTemporary (src.width, src.height, 0, src.format);
