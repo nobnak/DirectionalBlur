@@ -5,7 +5,7 @@ using UnityEngine;
 namespace DirectionalBlurPackage {
 
     [ExecuteInEditMode]
-    public class DirectionalBlur : MonoBehaviour {
+    public class AnisotropicDirectionalBlur : MonoBehaviour {
         const string PROP_AMOUNT_TEX = "_AmountTex";
         const string PROP_DIRECTION  ="_Dir";
         const string PROP_DISTANCE_STRETCH = "_StretchDist";

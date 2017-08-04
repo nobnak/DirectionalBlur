@@ -1,4 +1,4 @@
-﻿Shader "Hidden/DirectionalBlur" {
+﻿Shader "Hidden/AnisotropicDirectionalBlur" {
 	Properties {
 		_MainTex ("Texture", 2D) = "white" {}
         _AmountTex ("Amount", 2D) = "white" {}
@@ -11,7 +11,7 @@
         CGINCLUDE
         #include "UnityCG.cginc"
                
-        #define STEP_COUNT 128
+        #define STEP_COUNT 256
         static const float TWO_PI = 6.283185;
 
         struct appdata {
@@ -56,8 +56,8 @@
                 float4 csum = 0;
                 float2 dp = t * IN.dp;
                 for (int i = 0; i < STEP_COUNT; i++) {
-                    csum += float4(tex2D(_MainTex, frac(IN.uv - i * dp)).xyz, 1);
-                    csum += float4(tex2D(_MainTex, frac(IN.uv + i * dp)).xyz, 1);
+                    float4 c = tex2D(_MainTex, frac(IN.uv + i * dp));
+                    csum += float4(c.xyz, 1);
                 }
 				csum /= csum.w;
 
