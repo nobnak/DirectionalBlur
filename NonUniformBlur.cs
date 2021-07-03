@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,10 +10,10 @@ namespace DirectionalBlurPackage {
         const string PROP_DIRECTION  ="_Dir";
         const string PROP_DISTANCE_STRETCH = "_StretchDist";
 
-        [SerializeField]
-        Shader shader;
-        [SerializeField]
-        Texture amountTex;
+		[SerializeField]
+		Shader shader = null;
+		[SerializeField]
+		Texture amountTex = null;
 
         [SerializeField]
         [Range(1f, 10f)]
